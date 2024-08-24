@@ -1,0 +1,19 @@
+{
+  "name": "greeverbackend",
+  "version": "1.0.0",
+  "description": "Greever Online Learning Platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Bollam Shiva Shankara Varaprasad",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "greeverbackend": "file:",
+    "mongoose": "^8.5.4",
+    "nodemon": "^3.1.4"
+  }
+}
