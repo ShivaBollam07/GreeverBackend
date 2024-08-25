@@ -13,7 +13,8 @@ This repository contains the backend code for the Greever platform.
 
 ## Features
 
-- User Authentication (Login and Sign-Up with OTP verification)
+- User Authentication (`Login`, `Sign-Up` and `ForgotPassword` with OTP verification)
+- Implementation of `UserDetails` API for handling `User` personal data
 - In progress
 
 ## Tech Stack
