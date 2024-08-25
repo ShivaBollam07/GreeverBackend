@@ -4,7 +4,7 @@ dotenv.config({ path: './config.env' });
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const session  = require('express-session');
+const session = require('express-session');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -13,9 +13,6 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EmailPasswordForSendingOtp
     }
 });
-
-
-
 
 const AuthController = {
     Login: async (req, res) => {
@@ -47,7 +44,7 @@ const AuthController = {
     SignUp: (req, res) => {
         const { email, password } = req.body;
         const gmailRegex = /^[a-zA-Z0-9._-]+@gmail.com$/;
-        
+
         if (!email || !password) {
             console.log('Email or Password not provided');
             return res.json({ status: 'failed', message: 'Please Provide Email and Password', statusCode: 400 });
@@ -83,7 +80,7 @@ const AuthController = {
                         `,
                         text: `Your OTP is ${otp}`
                     };
-    
+
                     transporter.sendMail(mailOptions, (err, info) => {
                         if (err) {
                             console.error('Error sending OTP email: ', err);
@@ -99,31 +96,30 @@ const AuthController = {
                 }
             });
         }
-    }
-,    
+    },
 
     OTPVerification: async (req, res) => {
         const { otp } = req.body;
-        
+
         if (!otp) {
             return res.json({ status: 'failed', message: 'Please provide the OTP', statusCode: 400 });
         }
-    
+
         if (otp != req.session.otp) {
             return res.json({ status: 'failed', message: 'Invalid OTP', statusCode: 400 });
         }
 
-    
+
         const email = req.session.email;
         const password = req.session.password;
-    
+
         if (!email || !password) {
             return res.json({ status: 'failed', message: 'Invalid session data', statusCode: 500 });
         }
-    
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const insertUserQuery = `INSERT INTO users (email, password) VALUES (?, ?)`;
-    
+
         connection.query(insertUserQuery, [email, hashedPassword], (err, result) => {
             if (err) {
                 console.error(err);
@@ -132,14 +128,68 @@ const AuthController = {
                 req.session.otp = null;
                 req.session.email = null;
                 req.session.password = null;
-    
+
                 const token = jwt.sign({ email: email }, process.env.JWTSecret, { expiresIn: process.env.JWTExpire });
                 return res.json({ status: 'success', token: token, message: 'Account Created Successfully', statusCode: 200 });
             }
         });
+    },
+
+    ForgotPassword: async (req, res) => {
+        const { token, userEnteredOldPassword, newPassword, confirmPassword } = req.body;
+
+        if (!userEnteredOldPassword) {
+            return res.json({ 'status': 'error', 'message': 'Please Enter Old Password', 'statusCode': 400 });
+        }
+        if (!newPassword) {
+            return res.json({ 'status': 'error', 'message': 'Please Enter New Password', 'statusCode': 400 });
+        }
+        if (!confirmPassword) {
+            return res.json({ 'status': 'error', 'message': 'Please Enter Confirm Password', 'statusCode': 400 });
+        }
+
+        let email;
+        try {
+            const decoded = jwt.verify(token, process.env.JWTSecret);
+            email = decoded.email;
+        } catch (err) {
+            return res.json({ 'status': 'error', 'message': 'Invalid token', 'statusCode': 400 });
+        }
+
+        try {
+            const passwordInDBQuery = `SELECT password FROM users WHERE email = ?`;
+            connection.query(passwordInDBQuery, [email], async (error, results) => {
+                if (error) {
+                    return res.json({ 'status': 'error', 'message': 'An error Occurred', 'statusCode': 500 });
+                } else {
+                    const passwordInDB = results[0].password;
+
+                    const passwordMatch = await bcrypt.compare(userEnteredOldPassword, passwordInDB);
+                    if (!passwordMatch) {
+                        return res.json({ 'status': 'error', 'message': 'Old Password is Incorrect', 'statusCode': 400 });
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        return res.json({ 'status': 'error', 'message': 'New Password and Confirm Password do not match', 'statusCode': 400 });
+                    }
+
+                    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+                    const updatePasswordQuery = `UPDATE users SET password = ? WHERE email = ?`;
+                    connection.query(updatePasswordQuery, [hashedNewPassword, email], (error, results) => {
+                        if (error) {
+                            return res.json({ 'status': 'error', 'message': 'An error Occurred', 'statusCode': 500 });
+                        } else {
+                            return res.json({ 'status': 'success', 'message': 'Password Updated Successfully', 'statusCode': 200 });
+                        }
+                    });
+                }
+            });
+        } catch (err) {
+            console.error(err);
+            return res.json({ 'status': 'error', 'message': 'An error Occurred', 'statusCode': 500 });
+        }
     }
-    
-    
-};
+}
+
 
 module.exports = AuthController;
