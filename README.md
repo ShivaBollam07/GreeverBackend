@@ -46,7 +46,7 @@ Ensure you have the following installed:
    ```
 3. **Set Up the Database**
 
-   - Create a MySQL database with the name provided in the `.env` template (`Greever`).
+   - Create a MySQL database with the name provided in the `config.env` template (`Greever`).
    - Make sure to configure your MySQL user and password correctly.
 
 ### Running the Application
