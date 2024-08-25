@@ -14,7 +14,7 @@ This repository contains the backend code for the Greever platform.
 ## Features
 
 - User Authentication (Login and Sign-Up with OTP verification)
-- MySQL database integration
+- In progress
 
 ## Tech Stack
 
