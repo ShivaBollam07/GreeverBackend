@@ -6,6 +6,7 @@ const connection = require('./Config/DBConfig');
 const session = require('express-session');
 const AuthRouter = require('./Routes/AuthRouter.js');
 const UserRouter = require('./Routes/UserRouter.js');
+const CoursesRouter = require('./Routes/CoursesRouter.js');
 
 
 dotenv.config({path: './config.env'});
@@ -32,6 +33,7 @@ app.use(session({
 
 app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
+app.use('/app/v1/courses', CoursesRouter);
 
 app.use("*" , (req, res) => {
     res.status(404).json({error: 'Invalid URL'});
