@@ -1,6 +1,6 @@
 # Greever Platform
 
-Greever is an online learning platform that offers high-quality courses. This repository contains the backend code for the Greever platform.
+This repository contains the backend code for the Greever platform.
 
 ## Table of Contents
 
@@ -10,7 +10,6 @@ Greever is an online learning platform that offers high-quality courses. This re
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-
 
 ## Features
 
@@ -36,17 +35,15 @@ Ensure you have the following installed:
 
 1. **Clone the Repository**
 
-    ```bash
-    git clone https://github.com/ShivaBollam07/GreeverBackend.git
-    cd GreeverBackend
-    ```
-
+   ```bash
+   git clone https://github.com/ShivaBollam07/GreeverBackend.git
+   cd GreeverBackend
+   ```
 2. **Install Dependencies**
 
-    ```bash
-    npm install
-    ```
-
+   ```bash
+   npm install
+   ```
 3. **Set Up the Database**
 
    - Create a MySQL database with the name provided in the `.env` template (`Greever`).
@@ -69,3 +66,4 @@ Ensure you have the following installed:
    EmailForSendingOtp=
    EmailPasswordForSendingOtp=
    SessionSecret=zimbabwae
+   ```
