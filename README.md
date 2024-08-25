@@ -67,3 +67,12 @@ Ensure you have the following installed:
    EmailPasswordForSendingOtp=
    SessionSecret=zimbabwae
    ```
+2. **Start the Server**
+
+   ```bash
+   npm start
+   ```
+
+   The server should now be running at [http://localhost:3000](http://localhost:3000).
+
+
