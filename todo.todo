@@ -1,0 +1,74 @@
+imagine i have tables:
+
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE experience_helper_table (
+    user_id INT,
+    experience_id INT
+);
+
+CREATE TABLE experience (
+    experience_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_name VARCHAR(255) NOT NULL,
+    company_location VARCHAR(255),
+    job_title VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    description TEXT,
+    skills_used TEXT
+);
+
+CREATE TABLE education_helper_table (
+    user_id INT,
+    education_id INT
+);
+
+CREATE TABLE education (
+    education_id INT AUTO_INCREMENT PRIMARY KEY,
+    institute_name VARCHAR(255) NOT NULL,
+    institute_location VARCHAR(255),
+    degree VARCHAR(255),
+    course VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    grade VARCHAR(255),
+    skills_used TEXT
+);
+
+
+Insert Data into users Table:
+
+Insert a new record into the users table with the required fields (email, password).
+Retrieve the newly generated user_id after the insert operation.
+
+Insert Data into experience Table:
+Insert a new record into the experience table with the required fields (company_name, company_location, job_title, start_date, end_date, description, skills_used).
+Retrieve the newly generated experience_id after the insert operation.
+Update experience_helper_table:
+
+Insert the retrieved user_id and experience_id into the experience_helper_table.
+Insert Data into education Table:
+
+Insert a new record into the education table with the required fields (institute_name, institute_location, degree, course, start_date, end_date, grade, skills_used).
+Retrieve the newly generated education_id after the insert operation.
+Update education_helper_table:
+
+Insert the retrieved user_id and education_id into the education_helper_table.
+
+
+Queries to Write
+Get All Experiences:
+
+Write a query to fetch all records from the experience table.
+Get All Educations:
+
+Write a query to fetch all records from the education table.
+Get All Educations and Experiences for a User:
+
+Write a query to fetch all education and experience records for a specific user_id. This may involve joining the education_helper_table and experience_helper_table with the education and experience tables, respectively.
+
+if possible write apis for the above queries in nodejs using express and mysql as database and send the response in json format. 

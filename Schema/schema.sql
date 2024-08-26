@@ -1,50 +1,50 @@
--- CREATE TABLE users (
---     user_id INT AUTO_INCREMENT PRIMARY KEY,
---     email VARCHAR(255) NOT NULL,
---     password VARCHAR(255) NOT NULL
--- );
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
 
--- CREATE TABLE user_details (
---     user_id INT PRIMARY KEY,
---     full_name VARCHAR(255) NOT NULL,
---     about_yourself TEXT,
---     address TEXT,
---     personal_website_link TEXT,
---     github_link TEXT
--- );
+CREATE TABLE user_details (
+    user_id INT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    about_yourself TEXT,
+    address TEXT,
+    personal_website_link TEXT,
+    github_link TEXT
+);
 
--- CREATE TABLE experience_helper_table (
---     user_id INT,
---     experience_id INT
--- );
+CREATE TABLE experience_helper_table (
+    user_id INT,
+    experience_id INT
+);
 
--- CREATE TABLE experience (
---     experience_id INT AUTO_INCREMENT PRIMARY KEY,
---     company_name VARCHAR(255) NOT NULL,
---     company_location VARCHAR(255),
---     job_title VARCHAR(255),
---     start_date DATE,
---     end_date DATE,
---     description TEXT,
---     skills_used TEXT
--- );
+CREATE TABLE experience (
+    experience_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_name VARCHAR(255) NOT NULL,
+    company_location VARCHAR(255),
+    job_title VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    description TEXT,
+    skills_used TEXT
+);
 
--- CREATE TABLE education_helper_table (
---     user_id INT,
---     education_id INT
--- );
+CREATE TABLE education_helper_table (
+    user_id INT,
+    education_id INT
+);
 
--- CREATE TABLE education (
---     education_id INT AUTO_INCREMENT PRIMARY KEY,
---     institute_name VARCHAR(255) NOT NULL,
---     institute_location VARCHAR(255),
---     degree VARCHAR(255),
---     course VARCHAR(255),
---     start_date DATE,
---     end_date DATE,
---     grade VARCHAR(255),
---     skills_used TEXT
--- );
+CREATE TABLE education (
+    education_id INT AUTO_INCREMENT PRIMARY KEY,
+    institute_name VARCHAR(255) NOT NULL,
+    institute_location VARCHAR(255),
+    degree VARCHAR(255),
+    course VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    grade VARCHAR(255),
+    skills_used TEXT
+);
 
 -- CREATE TABLE courses (
 --     course_id INT AUTO_INCREMENT PRIMARY KEY,
