@@ -17,7 +17,7 @@ This repository contains the backend code for the Greever platform.
 - Implementation of `UserDetails` API for handling `User` personal data
 - Implementation of `Courses` API for handling `courses`
 - Implementation of `Videos` API for handling `Videos` acrosss courses in the `course_videos` collection
-- Implementation of `Readist_API` for handling different `Reads` 
+- Implementation of `Readinglst_API` for handling different `Reads`
 - Still In progress
 
 ## Tech Stack
