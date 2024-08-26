@@ -36,6 +36,7 @@ app.use(session({
 app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
 app.use('/app/v1/courses', CoursesRouter);
+app.use('/app/v1/courses', CoursesRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({ error: 'Invalid URL' });
