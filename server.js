@@ -9,10 +9,11 @@ const AuthRouter = require('./Routes/AuthRouter');
 const UserRouter = require('./Routes/UserRouter');
 const CoursesRouter = require('./Routes/CoursesRouter');
 const VideoRouter = require('./Routes/VideoRouter');
+const ReadingListRouter = require('./Routes/ReadingListRouter');
 
 dotenv.config({ path: './config.env' });
 
-// Connect to MySQL
+// Connect to MYSQL
 connection.getConnection(err => {
     if (err) {
         console.log('Error connecting to Database Greever: ' + err);
@@ -39,6 +40,7 @@ app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
 app.use('/app/v1/courses', CoursesRouter);
 app.use('/app/v1/video', VideoRouter);
+app.use('/app/v1/reading_lists', ReadingListRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({ error: 'Invalid URL' });
