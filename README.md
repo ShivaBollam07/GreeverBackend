@@ -16,7 +16,8 @@ This repository contains the backend code for the Greever platform.
 - User Authentication (`Login`, `Sign-Up` and `ForgotPassword` with OTP verification)
 - Implementation of `UserDetails` API for handling `User` personal data
 - Implementation of `Courses` API for handling `courses`
-- Implemention of `Videos` API for handling `Videos` acrosss courses in the `course_videos` collection
+- Implementation of `Videos` API for handling `Videos` acrosss courses in the `course_videos` collection
+- Implementation of `Readist_API` for handling different `Reads` 
 - Still In progress
 
 ## Tech Stack
@@ -52,10 +53,11 @@ Ensure you have the following installed:
 3. **Set Up the Database**
 
    - Create a MySQL database with the name provided in the `config.env` template (`Greever`).
-   - Make sure to configure your MySQL user and password correctly.
+   - Make sure to configure your MySQL user and password and other keys correctly.
    - create tables `users` and `user_deatils` with the schema provided in the `Schema` Folder
    - Create Database `Greever` in MongoDB atlas and connect with the `URI`
-   - Collections in `MongoDB` are `courses `and `course_videos`
+   - Collections in `MongoDB` are `courses `and `course_videos - 26-08-2024 `
+   - New Collection `reading_list` added to the `MongoDB - 26-08-2024`
 
 ### Running the Application
 
