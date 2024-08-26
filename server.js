@@ -8,9 +8,11 @@ const { connectToDB } = require('./Config/MongoConfig');
 const AuthRouter = require('./Routes/AuthRouter');
 const UserRouter = require('./Routes/UserRouter');
 const CoursesRouter = require('./Routes/CoursesRouter');
+const VideoRouter = require('./Routes/VideoRouter');
 
 dotenv.config({ path: './config.env' });
 
+// Connect to MySQL
 connection.getConnection(err => {
     if (err) {
         console.log('Error connecting to Database Greever: ' + err);
@@ -36,7 +38,7 @@ app.use(session({
 app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
 app.use('/app/v1/courses', CoursesRouter);
-app.use('/app/v1/courses', CoursesRouter);
+app.use('/app/v1/video', VideoRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({ error: 'Invalid URL' });

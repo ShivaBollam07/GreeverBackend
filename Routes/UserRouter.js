@@ -9,5 +9,4 @@ router.route('/details')
     .put(jwtTokenVerification, UserController.UpdateUserDetails);
 
 
-
 module.exports = router;
