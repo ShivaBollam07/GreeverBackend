@@ -24,6 +24,7 @@ This repository contains the backend code for the Greever platform.
 - **Node.js** - Backend server
 - **Express.js** - Web framework
 - **MySQL** - Database
+- **MongoDB** - Database
 
 ## Getting Started
 
@@ -33,6 +34,7 @@ Ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v14 or higher recommended)
 - [MySQL](https://www.mysql.com/)
+- [MongoDB](https://www.mongodb.com/)
 
 ### Installation
 
