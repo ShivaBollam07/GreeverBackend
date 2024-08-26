@@ -7,7 +7,7 @@ router.route('/')
     .get(jwtTokenVerification, VideoController.getVideos)
     .post(jwtTokenVerification, VideoController.postVideo);
 
-router.route('/video')
+router.route('/single')
     .get(jwtTokenVerification, VideoController.getVideo)
     .delete(jwtTokenVerification, VideoController.deleteVideo);
 

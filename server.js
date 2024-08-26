@@ -17,7 +17,7 @@ connection.getConnection(err => {
     if (err) {
         console.log('Error connecting to Database Greever: ' + err);
     } else {
-        console.log('Connected to Database Greever');
+        console.log('Connected to MYSQL Database Greever');
     }
 });
 
