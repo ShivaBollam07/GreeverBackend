@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const session = require('express-session');
 const { connectToDB } = require('./Config/MongoConfig');
-const { connection } = require('./Config/DBConfig');
+const connection = require('./Config/DBConfig');
 const AuthRouter = require('./Routes/AuthRouter');
 const UserRouter = require('./Routes/UserRouter');
 const CoursesRouter = require('./Routes/CoursesRouter');
@@ -14,12 +14,12 @@ const ReadingListRouter = require('./Routes/ReadingListRouter');
 dotenv.config({ path: './config.env' });
 
 // Connect to MYSQL
-connection.getConnection(err => {
+connection.getConnection((err) => {
     if (err) {
-        console.log('Error connecting to Database Greever: ' + err);
-    } else {
-        console.log('Connected to MYSQL Database Greever');
+        console.error('Database Connection Failed: ' + err.stack);
+        return;
     }
+    console.log('Connected to MYSQL Database Greever');
 });
 
 // Connect to MongoDB

@@ -1,7 +1,6 @@
 const { getDB } = require('../Config/MongoConfig');
 const { ObjectId } = require('mongodb');
 
-
 const CoursesController = {
     getCourses: async (req, res) => {
         try {

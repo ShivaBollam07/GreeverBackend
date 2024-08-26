@@ -7,6 +7,8 @@ router.route('/')
     .get(jwtTokenVerification, ReadingListController.getAllReadingList)
     .post(jwtTokenVerification, ReadingListController.addReadingList);
 
-router.route('/:_id')
+router.route('/:reading_list_id')
     .get(jwtTokenVerification, ReadingListController.getSingleReadingList)
     .delete(jwtTokenVerification, ReadingListController.deleteReadingList);
+
+module.exports = router;
