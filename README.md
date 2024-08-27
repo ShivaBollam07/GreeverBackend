@@ -2,6 +2,8 @@
 
 This repository contains the backend code for the Greever platform.
 
+To see the API flow go through this [Postman documentation](https://documenter.getpostman.com/view/26166586/2sAXjGda8p)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -20,7 +22,13 @@ This repository contains the backend code for the Greever platform.
 - Implementation of `Readinglst_API` for handling different `Reads`
 - Implementation of `ReadingList_API` to handle Items of different `Reads`
 - Implementation of `Education API`  to handle Education APIs
+- Implementation of `Experience API` to handle Experience APIs
 - Still In progress
+  - Implementation of `Projects API` to handle Projects APIs
+  - Implementation of `Skills API` to handle Skills APIs
+  - Implementation of `Certifications API` to handle Certifications APIs
+  - Implementation of `Quizes` in the `Courses API`
+  - Implementation of Resume making functionality based on the `Education`, `Experience`, `Projects`, `Skills`, `Certifications` and `Courses`
 
 ## Tech Stack
 
@@ -57,12 +65,13 @@ Ensure you have the following installed:
 
    - Create a MySQL database with the name provided in the `config.env` template (`Greever`).
    - Make sure to configure your MySQL user and password and other keys correctly.
-   - create tables `users` and `user_deatils` with the schema provided in the `Schema` Folder
+   - Create tables `users` and `user_deatils` with the schema provided in the `Schema` Folder
    - Create Database `Greever` in MongoDB atlas and connect with the `URI`
-   - Collections in `MongoDB` are `courses `and `course_videos - 26-08-2024 `
-   - New Collection `reading_list` added to the `MongoDB - 26-08-2024`
-   - New Collection `reading_list_items` created
-   - New tables create `education_helper_table` and `education`
+   - Create Collections in `MongoDB` are `courses `and `course_videos - 26-08-2024 `
+   - Create Collection `reading_list` in the `MongoDB `
+   - Create Collection `reading_list_items` in the `MongoDB
+   - Create New tables  `education_helper_table` and `education`
+   - Create New tables  `experience_helper_table` and `experience`
 
 ### Running the Application
 
