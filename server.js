@@ -12,6 +12,8 @@ const VideoRouter = require('./Routes/VideoRouter');
 const ReadingListRouter = require('./Routes/ReadingListRouter');
 const ReadingListItemRouter = require('./Routes/ReadingListItemRouter');
 const EducationRouter = require('./Routes/EducationRouter');
+const ExperienceRouter = require('./Routes/ExperienceRouter');
+
 
 dotenv.config({ path: './config.env' });
 
@@ -41,6 +43,7 @@ app.use(session({
 app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
 app.use('/app/v1/education', EducationRouter);
+app.use('/app/v1/experience', ExperienceRouter);
 app.use('/app/v1/courses', CoursesRouter);
 app.use('/app/v1/video', VideoRouter);
 app.use('/app/v1/reading_lists', ReadingListRouter);
