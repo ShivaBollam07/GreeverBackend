@@ -19,7 +19,7 @@ const ExperienceController = {
     getAllExperienceForAUser: async (req, res) => {
         const token = req.body.token;
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
 
             const userQuery = `SELECT * FROM users WHERE email = ?`;
@@ -54,7 +54,7 @@ const ExperienceController = {
         }
 
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
 
             const userQuery = `SELECT * FROM users WHERE email = ?`;
@@ -87,7 +87,7 @@ const ExperienceController = {
     getSingleExperiencebasedonUserIdandExperienceId: async (req, res) => {
         const token = req.body.token;
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
 
             const userQuery = `SELECT * FROM users WHERE email = ?`;
@@ -121,7 +121,7 @@ const ExperienceController = {
     deleteExperience: async (req, res) => {
         const token = req.body.token;
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
 
             const userQuery = `SELECT * FROM users WHERE email = ?`;
@@ -134,11 +134,13 @@ const ExperienceController = {
             const user_id = userResult[0].user_id;
             const experience_id = req.params.experience_id;
 
+           
+            const experienceHelperQuery = `DELETE FROM experience_helper_table WHERE experience_id = ?`;
+            await queryAsync(experienceHelperQuery, [experience_id]);
+
             const experienceQuery = `DELETE FROM experience WHERE experience_id = ?`;
             await queryAsync(experienceQuery, [experience_id]);
 
-            const experienceHelperQuery = `DELETE FROM experience_helper_table WHERE experience_id = ?`;
-            await queryAsync(experienceHelperQuery, [experience_id]);
 
             return res.json({ status: 'success', message: 'Experience deleted successfully.', StatusCode: 200 });
         } catch (error) {

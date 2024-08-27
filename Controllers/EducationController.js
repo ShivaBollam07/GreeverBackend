@@ -19,7 +19,8 @@ const EducationController = {
   getAllEducationForAUser: async (req, res) => {
     const token = req.body.token;
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWTSecret);
+      
       const email = decoded.email;
       const userQuery = `SELECT * FROM users WHERE email = ?`;
       const userResult = await queryAsync(userQuery, [email]);
@@ -47,7 +48,7 @@ const EducationController = {
       return res.json({ status: 'failed', error: 'All fields are required.', StatusCode: 400 });
     }
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWTSecret);
       const email = decoded.email;
       const userQuery = `SELECT * FROM users WHERE email = ?`;
       const userResult = await queryAsync(userQuery, [email]);
@@ -72,7 +73,7 @@ const EducationController = {
   getSingleEducationbasedonUserIdandEducationId: async (req, res) => {
     const token = req.body.token;
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWTSecret);
       const email = decoded.email;
       const userQuery = `SELECT * FROM users WHERE email = ?`;
       const userResult = await queryAsync(userQuery, [email]);
@@ -100,7 +101,7 @@ const EducationController = {
   deleteEducation: async (req, res) => {
     const token = req.body.token;
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWTSecret);
       const email = decoded.email;
       const userQuery = `SELECT * FROM users WHERE email = ?`;
       const userResult = await queryAsync(userQuery, [email]);
