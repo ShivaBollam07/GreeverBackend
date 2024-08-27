@@ -43,7 +43,6 @@
 --     start_date DATE,
 --     end_date DATE,
 --     grade VARCHAR(255),
---     skills_used TEXT
 -- );
 
 -- CREATE TABLE courses (

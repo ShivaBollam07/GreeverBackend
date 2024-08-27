@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const ReadingListItem = new mongoose.Schema({
+const readingListItemSchema = new mongoose.Schema({
     reading_list_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ReadingList',
         required: true
     },
     reading_list_item_title: {
@@ -15,6 +16,6 @@ const ReadingListItem = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-const ReadingListItemModel = mongoose.model('ReadingListItem', ReadingListItem);
+const ReadingListItem = mongoose.model('ReadingListItem', readingListItemSchema);
 
-module.exports = ReadingListItemModel;
+module.exports = ReadingListItem;

@@ -10,6 +10,8 @@ const UserRouter = require('./Routes/UserRouter');
 const CoursesRouter = require('./Routes/CoursesRouter');
 const VideoRouter = require('./Routes/VideoRouter');
 const ReadingListRouter = require('./Routes/ReadingListRouter');
+const ReadingListItemRouter = require('./Routes/ReadingListItemRouter');
+const EducationRouter = require('./Routes/EducationRouter');
 
 dotenv.config({ path: './config.env' });
 
@@ -19,7 +21,7 @@ connection.getConnection((err) => {
         console.error('Database Connection Failed: ' + err.stack);
         return;
     }
-    console.log('Connected to MYSQL Database Greever');
+    console.log('Connected to MYSQL Database ' +  process.env.Mysql_DB_NAME);
 });
 
 // Connect to MongoDB
@@ -38,9 +40,11 @@ app.use(session({
 
 app.use('/app/v1/auth', AuthRouter);
 app.use('/app/v1/user', UserRouter);
+app.use('/app/v1/education', EducationRouter);
 app.use('/app/v1/courses', CoursesRouter);
 app.use('/app/v1/video', VideoRouter);
 app.use('/app/v1/reading_lists', ReadingListRouter);
+app.use('/app/v1/reading_list', ReadingListItemRouter);
 
 app.use('*', (req, res) => {
     res.status(404).json({ error: 'Invalid URL' });

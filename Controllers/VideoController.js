@@ -22,7 +22,7 @@ const VideoController = {
             return res.json({ 'status': 'failed', error: 'Failed to fetch videos.', 'StatusCode': 500 });
         }
     },
-    postVideo: (req, res) => {
+    postVideo: async (req, res) => {
         try {
             const { course_id, video_title, video_description, video, video_duration } = req.body;
 
@@ -39,7 +39,7 @@ const VideoController = {
             };
 
             const db = getDB();
-            const result = db.collection('course_videos').insertOne(newVideo);
+            const result =await db.collection('course_videos').insertOne(newVideo);
 
             return res.json({
                 message: 'Video added successfully.',
@@ -58,9 +58,9 @@ const VideoController = {
     getVideo: async (req, res) => {
         try {
             const db = getDB();
-            const { videoId } = req.body;
+            const videoId = req.params.video_id;
             if (!videoId) {
-                return res.json({ 'status': 'failed', error: 'Video ID is required.','message' : 'Cant get Video' , 'StatusCode': 400 });
+                return res.json({ 'status': 'failed', error: 'Video ID is required.', 'message': 'Cant get Video', 'StatusCode': 400 });
             }
             const courseVideo = await db.collection('course_videos').findOne({ _id: new ObjectId(videoId) });
             if (!courseVideo) {
@@ -73,19 +73,25 @@ const VideoController = {
         }
     },
 
-    deleteVideo: (req, res) => {
+    deleteVideo: async (req, res) => {
         try {
             const db = getDB();
-            const { videoId } = req.body;
+            const videoId = req.params.video_id;
             if (!videoId) {
                 return res.json({ 'status': 'failed', error: 'Video ID is required.', 'message': 'Cant get video', 'StatusCode': 400 });
             }
-            const video = db.collection('course_videos').deleteOne({ _id: new ObjectId(videoId) });
-            if (!video) {
+            const findvideo = await db.collection('course_videos').findOne({ _id: new ObjectId(videoId) });
+            if (!findvideo) {
                 return res.json({ 'status': 'failed', error: 'Video not found.', 'StatusCode': 404 });
             }
-            else{
-                res.json({ 'status': 'success', 'message': 'Video deleted successfully.', 'StatusCode': 200 });
+            else {
+                const video = await db.collection('course_videos').deleteOne({ _id: new ObjectId(videoId) });
+                if (!video) {
+                    return res.json({ 'status': 'failed', error: 'Video not found.', 'StatusCode': 404 });
+                }
+                else {
+                    res.json({ 'status': 'success', 'message': 'Video deleted successfully.', 'StatusCode': 200 });
+                }
             }
         } catch (error) {
             console.error('Error deleting video:', error);

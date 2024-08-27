@@ -1,28 +1,23 @@
-const mongoose = require('mongoose');
-
-const ReadingList = new mongoose.Schema({
+const readingListSchema = new mongoose.Schema({
     reading_list_title: {
         type: String,
         required: true
     },
-    reading_list_description:{
+    reading_list_description: {
         type: String,
         required: true
     },
-    reading_list_skills:{
-        type :String,
-        required: true
+    reading_list_skills: {
+        type: [String]
     },
-    reading_list_image:{
-        type: String,
-        required: true
+    reading_list_image: {
+        type: String
     },
-    reading_list_banner:{
-        type: String,
-        required: true
+    reading_list_banner: {
+        type: String
     }
 }, { timestamps: true });
 
-const ReadingModel = mongoose.model('Reading', ReadingList);
+const ReadingList = mongoose.model('ReadingList', readingListSchema);
 
-module.exports = ReadingModel;
+module.exports = ReadingList;
