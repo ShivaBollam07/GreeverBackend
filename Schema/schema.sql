@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- CREATE TABLE users (
 --     user_id INT AUTO_INCREMENT PRIMARY KEY,
 --     email VARCHAR(255) NOT NULL,
@@ -167,4 +168,45 @@
 --     user_id INT,
 --     answer VARCHAR(255),
 --     correct BOOLEAN
+-- );
+
+-- Table for mapping user and experience
+-- CREATE TABLE experience_helper_table (
+--     user_id INT,
+--     experience_id INT,
+--     PRIMARY KEY (user_id, experience_id),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id),
+--     FOREIGN KEY (experience_id) REFERENCES experience(experience_id)
+-- );
+
+-- -- Table for storing experience details
+-- CREATE TABLE experience (
+--     experience_id INT AUTO_INCREMENT PRIMARY KEY,
+--     company_name VARCHAR(255) NOT NULL,
+--     company_location VARCHAR(255),
+--     job_title VARCHAR(255),
+--     description TEXT,
+--     start_date DATE,
+--     end_date DATE
+-- );
+
+-- -- Table for mapping user and education
+-- CREATE TABLE education_helper_table (
+--     user_id INT,
+--     education_id INT,
+--     PRIMARY KEY (user_id, education_id),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id),
+--     FOREIGN KEY (education_id) REFERENCES education(education_id)
+-- );
+
+-- -- Table for storing education details
+-- CREATE TABLE education (
+--     education_id INT AUTO_INCREMENT PRIMARY KEY,
+--     institute_name VARCHAR(255) NOT NULL,
+--     institute_location VARCHAR(255),
+--     degree VARCHAR(255),
+--     major VARCHAR(255),
+--     start_date DATE,
+--     end_date DATE,
+--     grade VARCHAR(255)
 -- );
