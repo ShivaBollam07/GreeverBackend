@@ -18,6 +18,8 @@ This repository contains the backend code for the Greever platform.
 - Implementation of `Courses` API for handling `courses`
 - Implementation of `Videos` API for handling `Videos` acrosss courses in the `course_videos` collection
 - Implementation of `Readinglst_API` for handling different `Reads`
+- Implementation of `ReadingList_API` to handle Items of different `Reads`
+- Implementation of `Education API`  to handle Education APIs
 - Still In progress
 
 ## Tech Stack
@@ -26,6 +28,7 @@ This repository contains the backend code for the Greever platform.
 - **Express.js** - Web framework
 - **MySQL** - Database
 - **MongoDB** - Database
+- **JavaScript** - Programming language
 
 ## Getting Started
 
@@ -58,6 +61,8 @@ Ensure you have the following installed:
    - Create Database `Greever` in MongoDB atlas and connect with the `URI`
    - Collections in `MongoDB` are `courses `and `course_videos - 26-08-2024 `
    - New Collection `reading_list` added to the `MongoDB - 26-08-2024`
+   - New Collection `reading_list_items` created
+   - New tables create `education_helper_table` and `education`
 
 ### Running the Application
 
