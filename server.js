@@ -13,6 +13,9 @@ const ReadingListRouter = require('./Routes/ReadingListRouter');
 const ReadingListItemRouter = require('./Routes/ReadingListItemRouter');
 const EducationRouter = require('./Routes/EducationRouter');
 const ExperienceRouter = require('./Routes/ExperienceRouter');
+//cors
+const cors = require('cors');
+
 
 
 dotenv.config({ path: './config.env' });
@@ -30,6 +33,7 @@ connection.getConnection((err) => {
 connectToDB();
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -41,6 +45,7 @@ app.use(session({
 }));
 
 app.use('/app/v1/auth', AuthRouter);
+app.use('/app/v1/auth/getname', AuthRouter);
 app.use('/app/v1/user', UserRouter);
 app.use('/app/v1/education', EducationRouter);
 app.use('/app/v1/experience', ExperienceRouter);

@@ -15,4 +15,7 @@ router.route('/verify-otp')
 router.route('/forgot-password')
     .put(jwtTokenVerification, AuthController.ForgotPassword);
 
+router.route('/getname')
+    .post(jwtTokenVerification, AuthController.GetName);
+
 module.exports = router;

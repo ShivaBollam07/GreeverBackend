@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const AuthController = {
+    
     Login: async (req, res) => {
         const { email, password } = req.body;
         if (!email || !password) {
@@ -80,6 +81,7 @@ const AuthController = {
                         `,
                         text: `Your OTP is ${otp}`
                     };
+                    console.log('OTP Generated: ', otp);
 
                     transporter.sendMail(mailOptions, (err, info) => {
                         if (err) {
@@ -88,6 +90,7 @@ const AuthController = {
                         } else {
                             console.log('Email Sent: ' + info.response);
                             req.session.otp = otp;
+                            console.log('OTP in session: ', req.session.otp);
                             req.session.email = email;
                             req.session.password = password;
                             return res.json({ status: 'success', message: 'OTP sent to your email', statusCode: 200 });
@@ -100,26 +103,28 @@ const AuthController = {
 
     OTPVerification: async (req, res) => {
         const { otp } = req.body;
-
+    
         if (!otp) {
             return res.json({ status: 'failed', message: 'Please provide the OTP', statusCode: 400 });
         }
-
+        
+        console.log('OTP Entered: ', otp);
+        console.log('OTP Stored in session: ', req.session.otp);
+    
         if (otp != req.session.otp) {
             return res.json({ status: 'failed', message: 'Invalid OTP', statusCode: 400 });
         }
-
-
+    
         const email = req.session.email;
         const password = req.session.password;
-
+    
         if (!email || !password) {
             return res.json({ status: 'failed', message: 'Invalid session data', statusCode: 500 });
         }
-
+    
         const hashedPassword = await bcrypt.hash(password, 10);
         const insertUserQuery = `INSERT INTO users (email, password) VALUES (?, ?)`;
-
+    
         connection.query(insertUserQuery, [email, hashedPassword], (err, result) => {
             if (err) {
                 console.error(err);
@@ -128,12 +133,13 @@ const AuthController = {
                 req.session.otp = null;
                 req.session.email = null;
                 req.session.password = null;
-
+    
                 const token = jwt.sign({ email: email }, process.env.JWTSecret, { expiresIn: process.env.JWTExpire });
                 return res.json({ status: 'success', token: token, message: 'Account Created Successfully', statusCode: 200 });
             }
         });
     },
+    
 
     ForgotPassword: async (req, res) => {
         const { token, userEnteredOldPassword, newPassword, confirmPassword } = req.body;
@@ -188,6 +194,14 @@ const AuthController = {
             console.error(err);
             return res.json({ 'status': 'error', 'message': 'An error Occurred', 'statusCode': 500 });
         }
+    },
+    GetName : async(req,res) => {
+        const { token } = req.body;
+        const decoded = jwt.verify(token, process.env.JWTSecret);
+        const email = decoded.email;
+        sliced_email = email.split('@');
+        const name = sliced_email[0];
+        return res.json({ 'status': 'success', 'name': name, 'statusCode': 200 });
     }
 }
 
