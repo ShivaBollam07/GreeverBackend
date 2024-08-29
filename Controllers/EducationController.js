@@ -17,7 +17,7 @@ const queryAsync = (sql, params) => {
 
 const EducationController = {
   getAllEducationForAUser: async (req, res) => {
-    const token = req.body.token;
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
     try {
       const decoded = jwt.verify(token, process.env.JWTSecret);
       
@@ -42,7 +42,7 @@ const EducationController = {
   },
 
   addEducation: async (req, res) => {
-    const token = req.body.token;
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
     const { institute_name, institute_location, degree, major, start_date, end_date, grade } = req.body;
     if (!institute_name || !institute_location || !degree || !major || !start_date || !end_date || !grade) {
       return res.json({ status: 'failed', error: 'All fields are required.', StatusCode: 400 });
@@ -71,7 +71,7 @@ const EducationController = {
   },
 
   getSingleEducationbasedonUserIdandEducationId: async (req, res) => {
-    const token = req.body.token;
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
     try {
       const decoded = jwt.verify(token, process.env.JWTSecret);
       const email = decoded.email;
@@ -99,7 +99,7 @@ const EducationController = {
   },
 
   deleteEducation: async (req, res) => {
-    const token = req.body.token;
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
     try {
       const decoded = jwt.verify(token, process.env.JWTSecret);
       const email = decoded.email;

@@ -17,7 +17,7 @@ const queryAsync = (sql, params) => {
 
 const ExperienceController = {
     getAllExperienceForAUser: async (req, res) => {
-        const token = req.body.token;
+        const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
         try {
             const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
@@ -46,7 +46,7 @@ const ExperienceController = {
     },
 
     addExperience: async (req, res) => {
-        const token = req.body.token;
+        const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
         const { company_name, company_location, job_title, description, start_date, end_date } = req.body;
 
         if (!company_name || !company_location || !job_title || !description || !start_date || !end_date) {
@@ -85,7 +85,7 @@ const ExperienceController = {
     },
 
     getSingleExperiencebasedonUserIdandExperienceId: async (req, res) => {
-        const token = req.body.token;
+        const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
         try {
             const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
@@ -119,7 +119,7 @@ const ExperienceController = {
     },
 
     deleteExperience: async (req, res) => {
-        const token = req.body.token;
+        const token = req.headers.authorization && req.headers.authorization.split(' ')[1] || req.body.token;
         try {
             const decoded = jwt.verify(token, process.env.JWTSecret);
             const email = decoded.email;
