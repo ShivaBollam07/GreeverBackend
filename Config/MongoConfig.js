@@ -4,7 +4,10 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
 const uri = process.env.MongoDB_URI;
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, {
+    ssl: true,
+    tlsInsecure: true, 
+});
 
 let db;
 
@@ -12,6 +15,7 @@ const connectToDB = async () => {
     try {
         await client.connect();
         db = client.db(process.env.MongoDB_DBName);
+
         console.log('Connected to Mongo Database ' + process.env.MongoDB_DBName);
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
@@ -23,6 +27,7 @@ const getDB = () => {
     if (!db) {
         throw new Error('Database not initialized. Call connectToDB first.');
     }
+   
     return db;
 };
 

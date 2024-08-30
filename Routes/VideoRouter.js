@@ -3,9 +3,11 @@ const jwtTokenVerification = require('../Middleware/jwtTokenVerification');
 const VideoController = require('../Controllers/VideoController');
 const router = express.Router();
 
-router.route('/')
-    .get(jwtTokenVerification, VideoController.getVideos)
+router.route('/upload')
     .post(jwtTokenVerification, VideoController.postVideo);
+
+router.route('/')
+    .post(jwtTokenVerification, VideoController.getVideos);
 
 router.route('/:video_id')
     .get(jwtTokenVerification, VideoController.getVideo)

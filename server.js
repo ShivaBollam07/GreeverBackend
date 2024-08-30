@@ -13,10 +13,7 @@ const ReadingListRouter = require('./Routes/ReadingListRouter');
 const ReadingListItemRouter = require('./Routes/ReadingListItemRouter');
 const EducationRouter = require('./Routes/EducationRouter');
 const ExperienceRouter = require('./Routes/ExperienceRouter');
-//cors
 const cors = require('cors');
-
-
 
 dotenv.config({ path: './config.env' });
 
@@ -32,8 +29,25 @@ connection.getConnection((err) => {
 // Connect to MongoDB
 connectToDB();
 
+// db.courses.updateMany(
+//     {},
+//     { $set: { course_banner: "https://static.vecteezy.com/system/resources/previews/000/664/483/original/abstract-blue-banner-design-vector.jpg" } }
+//   )
+
+// run the above query 
+
+
+
+
+
 const app = express();
-app.use(cors());
+
+// CORS configuration
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 app.use(express.json());
 
@@ -41,7 +55,11 @@ app.use(session({
     secret: process.env.SessionSecret,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { 
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    }
 }));
 
 app.use('/app/v1/auth', AuthRouter);
