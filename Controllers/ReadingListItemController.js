@@ -5,7 +5,7 @@ const ReadingListItem = require('../Models/ReadingListSingleModel');
 const ReadingListItemController = {
     getAllReadingListItem: async (req, res) => {
         const db = getDB();  
-        const reading_list_id = req.body.reading_list_id;
+        const reading_list_id = req.params.reading_list_id;
         console.log(reading_list_id);
         try {
             if (!ObjectId.isValid(reading_list_id)) {
@@ -17,7 +17,13 @@ const ReadingListItemController = {
             }
 
             const readingListItems = await db.collection('reading_list_items').find({ reading_list_id: new ObjectId(reading_list_id) }).toArray();
-            return res.json({ status: 'success', data: readingListItems, message: 'Reading List Items fetched successfully.', StatusCode: 200 });
+
+            if(readingListItems.length === 0){
+                return res.json({ status: 'failed', error: 'No reading list items found.', StatusCode: 404 });
+            }
+            else{
+                return res.json({ status: 'success', data: readingListItems, message: 'Reading List Items fetched successfully.', StatusCode: 200 });
+            }
         } catch (error) {
             console.error('Error fetching reading list items:', error);
             return res.json({ status: 'failed', error: 'Failed to fetch reading list items.', StatusCode: 500 });

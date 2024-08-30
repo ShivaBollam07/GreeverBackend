@@ -66,16 +66,19 @@ const AuthController = {
                     const mailOptions = {
                         from: process.env.EmailForSendingOtp,
                         to: email,
-                        subject: 'Complete Your Registration with Grrever',
+                        subject: 'Complete Your Registration with Greever',
                         html: `
                             <html>
                                 <h2>Thank you for registering with Greever</h2>
-                                <h3>Complete registration using below Otp</h3>
+                                <h3>Complete registration using This
+                                <strong>
+                                       OTP
+                                </strong>
+                                </h3>
                                 <h1>${otp}</h1>
                                 <p>
                                     <span><strong>Grrever</strong></span> 
-                                    is an online learning platform that offers Courses and Certifications in various fields.
-
+                                    Thank you for registering with us. We are excited to have you on board. 
                                 </p>
                             </html>
                         `,

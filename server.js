@@ -26,23 +26,11 @@ connection.getConnection((err) => {
     console.log('Connected to MYSQL Database ' +  process.env.Mysql_DB_NAME);
 });
 
-// Connect to MongoDB
 connectToDB();
-
-// db.courses.updateMany(
-//     {},
-//     { $set: { course_banner: "https://static.vecteezy.com/system/resources/previews/000/664/483/original/abstract-blue-banner-design-vector.jpg" } }
-//   )
-
-// run the above query 
-
-
-
 
 
 const app = express();
 
-// CORS configuration
 app.use(cors({
   origin: true,
   credentials: true

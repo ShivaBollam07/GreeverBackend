@@ -23,12 +23,12 @@ const connectToDB = async () => {
     }
 };
 
+
 const getDB = () => {
     if (!db) {
         throw new Error('Database not initialized. Call connectToDB first.');
     }
-   
-    return db;
+       return db;
 };
 
 module.exports = { connectToDB, getDB };
