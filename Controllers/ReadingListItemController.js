@@ -6,7 +6,6 @@ const ReadingListItemController = {
     getAllReadingListItem: async (req, res) => {
         const db = getDB();  
         const reading_list_id = req.params.reading_list_id;
-        console.log(reading_list_id);
         try {
             if (!ObjectId.isValid(reading_list_id)) {
                 return res.json({ status: 'failed', error: 'Invalid Reading List ID.', StatusCode: 400 });
